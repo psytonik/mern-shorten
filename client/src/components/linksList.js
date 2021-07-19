@@ -1,4 +1,5 @@
-import {Table} from "react-bootstrap";
+
+import {MDBTable} from "mdb-react-ui-kit";
 import {Link} from "react-router-dom";
 
 const LinksList = ({links}) => {
@@ -8,13 +9,13 @@ const LinksList = ({links}) => {
 	return (
 		<div >
 			<h1 className="text-center mt-3">Your Shorted Links</h1>
-			<Table striped bordered hover >
+			<MDBTable hover>
 				<thead>
 				<tr>
 					<th>#</th>
 					<th>Long Link</th>
 					<th>Short Link</th>
-					<th>Username</th>
+					<th>Action</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -31,7 +32,7 @@ const LinksList = ({links}) => {
 					)
 				})}
 				</tbody>
-			</Table>
+			</MDBTable>
 		</div>
 	);
 }

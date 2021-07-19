@@ -8,6 +8,7 @@ router.route('/:code')
 			const link = await Link.findOne({code:req.params.code});
 			if(link){
 				link.clicks++
+				link.clicksDate.push(new Date())
 				await link.save();
 				return res.redirect(link.from);
 			}

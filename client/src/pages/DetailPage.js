@@ -23,6 +23,7 @@ export const DetailPage = ()=> {
 			setLink(data)
 		}catch (e) {}
 	},[token,linkId,request])
+
 	useEffect(()=>{
 		getLink().then(r =>r);
 	},[getLink]);

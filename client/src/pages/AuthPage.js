@@ -1,5 +1,17 @@
+
+import {
+	MDBBtn,
+	MDBCard,
+	MDBCardBody,
+	MDBCardFooter,
+	MDBCardHeader,
+	MDBCardTitle,
+	MDBCheckbox,
+	MDBInput
+} from "mdb-react-ui-kit";
 import React, {useContext, useEffect, useState} from "react";
-import {Card, Col, Row,Button,Form} from "react-bootstrap";
+
+
 import {AuthContext} from "../context/AuthContext.js";
 import {useHttp} from "../shared/hooks/http.hook.js";
 
@@ -34,58 +46,77 @@ export const AuthPage = () => {
 
 	return (
 		<>
-			<Row className=" text-center">
-				<Col lg="4">
+			<div className="row text-center mt-5">
+				<div className="col-md-3">
 					<p>Sponsored by</p>
 					<a href="https://flbba.org/" target="_blank" rel="noopener noreferrer">
 						<img src="https://himselected.com/sp4.gif" border="0"  alt="flbba.org"/>
 					</a>
-				</Col>
-				<Col lg="4">
-					<h1>Short your links</h1>
-					<Card className="bg-light">
-						<Card.Header>Authentication</Card.Header>
-						<Card.Body>
-							<Form.Control
-								label='Email'
-								name='email'
-								id='typeEmail'
-								type='email'
-								className='mb-3'
-								value={form.email}
-								onChange={changeHandler}
-							/>
-							<Form.Control
-								label='Password'
-								name='password'
-								id='typeText'
-								type='password'
-								value={form.password}
-								onChange={changeHandler}
-								className='mb-3'
-								/>
-							<Button
-								className='mx-2'
-								variant="info"
-								disabled={loading}
-								onClick={signInHandler}
-							> Sign In </Button>
-							<Button
-								className='mx-2'
-								variant="success"
-								onClick={signUpHandler}
-								disabled={loading}
-							> Sign Up </Button>
-						</Card.Body>
-					</Card>
-				</Col>
-				<Col lg="4">
+				</div>
+				<div className="col-md-6" >
+						<MDBCard className="shadow-5">
+							<MDBCardHeader>
+								<MDBCardTitle>Authorization</MDBCardTitle>
+							</MDBCardHeader>
+							<MDBCardBody>
+									<div className="form-outline mb-3">
+										<MDBInput
+											name='email'
+											id='email'
+											type='email'
+											label="Email"
+											size='lg'
+											value={form.email}
+											onChange={changeHandler}
+										/>
+									</div>
+									<div className="form-outline mb-3">
+										<MDBInput
+											name='password'
+											id='password'
+											type='password'
+											label="Password"
+											size='lg'
+											value={form.password}
+											onChange={changeHandler}
+											className='form-control mb-3'
+										/>
+									</div>
+								<div className="form-check d-flex justify-content-center mb-1">
+									<MDBCheckbox
+										type="checkbox"
+										value=""
+										label="I have read and agree to the terms"
+									/>
+								</div>
+							</MDBCardBody>
+							<MDBCardFooter className=" d-grid d-md-flex justify-content-between">
+								<MDBBtn
+										outline
+										rounded
+										color='secondary'
+										size='lg'
+								        disabled={loading}
+								        onClick={signInHandler}
+								> Sign In </MDBBtn>
+								<MDBBtn
+										color="info"
+										rounded
+										outline
+										size='lg'
+								        onClick={signUpHandler}
+								        disabled={loading}
+								> Sign Up </MDBBtn>
+							</MDBCardFooter>
+						</MDBCard>
+				</div>
+				<div className="col-md-3">
 					<p>Sponsored by</p>
 					<a href="https://flbba.org/" target="_blank" rel="noopener noreferrer">
 						<img src="https://himselected.com/sp4.gif" border="0"  alt="flbba.org"/>
 					</a>
-				</Col>
-			</Row>
+				</div>
+			</div>
 		</>
 	)
 }

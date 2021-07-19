@@ -1,37 +1,53 @@
-import React, {useContext} from 'react';
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {
+	MDBCollapse,
+	MDBContainer,
+	MDBIcon,
+	MDBNavbar,
+	MDBNavbarBrand, MDBNavbarItem,
+	MDBNavbarNav,
+	MDBNavbarToggler
+} from "mdb-react-ui-kit";
+import React, {useContext, useState} from 'react';
 import {NavLink, useHistory} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext.js";
 
 const NavBar = () => {
 	const history = useHistory();
-	const {logOut} = useContext(AuthContext)
+	const {logOut} = useContext(AuthContext);
+	const [showNav, setShowNav] = useState(false);
+
 	const logOutHandler = event => {
 		event.preventDefault();
 		logOut();
 		history.push('/')
 	}
-
 	return (
-		<Navbar bg="light" expand="lg">
-			<Container >
-				<Navbar.Brand href="/" >Shorten</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="me-auto">
-						<li className="nav-item">
+		<MDBNavbar expand='lg' light bgColor='light'>
+			<MDBContainer fluid>
+				<MDBNavbarBrand href="/">Shorten</MDBNavbarBrand>
+				<MDBNavbarToggler
+					type='button'
+					aria-expanded='false'
+					aria-label='Toggle navigation'
+					onClick={() => setShowNav(!showNav)}
+				>
+					<MDBIcon icon='bars' fas />
+				</MDBNavbarToggler>
+				<MDBCollapse navbar show={showNav}>
+					<MDBNavbarNav right className='mb-2 mb-lg-0'>
+						<MDBNavbarItem>
 							<NavLink className="nav-link" to={'/create'}>Create</NavLink>
-						</li>
-						<li className="nav-item">
+						</MDBNavbarItem>
+						<MDBNavbarItem>
 							<NavLink className="nav-link" to={'/links'}>Links</NavLink>
-						</li>
-						<li className="nav-item">
+						</MDBNavbarItem>
+						<MDBNavbarItem>
 							<NavLink className="nav-link" to="/" onClick={logOutHandler}>LogOut</NavLink>
-						</li>
-					</Nav>
-				</Navbar.Collapse>
-			</Container>
-		</Navbar>
+						</MDBNavbarItem>
+					</MDBNavbarNav>
+				</MDBCollapse>
+			</MDBContainer>
+		</MDBNavbar>
 	);
 };
 

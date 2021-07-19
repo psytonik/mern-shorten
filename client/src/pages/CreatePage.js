@@ -1,3 +1,4 @@
+import {MDBInput, MDBRow} from "mdb-react-ui-kit";
 import React, {useContext, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext.js";
@@ -23,20 +24,19 @@ export const CreatePage = ()=> {
 		}
 	}
 	return (
-		<div className="row">
+		<MDBRow>
 			<div className="col-8 offset-2 pt-2">
 				<h1 className="text-center">Short Link Generator</h1>
-				<input
-					label='Link'
+				<MDBInput
 					id='link'
-					type='text'
-					className='form-control mb-3'
+					type='url'
+					size='lg'
 					value={link}
 					onChange={e=>setLink(e.target.value)}
 					onKeyPress={pressHandler}
-					placeholder="Insert Your Link"
+					label="Insert Your Link"
 					/>
 			</div>
-		</div>
+		</MDBRow>
 	)
 }

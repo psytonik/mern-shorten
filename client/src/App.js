@@ -17,7 +17,7 @@ function App() {
             token,login,logOut,userId,isAuthenticated
         }}>
             {isAuthenticated && <NavBar/>}
-            <div className="container">
+            <div className="container-fluid">
                 {routes}
             </div>
         </AuthContext.Provider>
