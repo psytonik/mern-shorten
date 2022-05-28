@@ -25,5 +25,8 @@
     "mongoose": "^5.13.2",
     "nodemon": "^2.0.12",
     "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "helmet": "^4.6.0"
   }
 }

@@ -1,8 +1,12 @@
 import {MDBInput, MDBRow} from "mdb-react-ui-kit";
 import React, {useContext, useState} from "react";
 import {useHistory} from "react-router-dom";
+import {BACK_END_LINK} from "../constants/others.js";
 import {AuthContext} from "../context/AuthContext.js";
 import {useHttp} from "../shared/hooks/http.hook.js";
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export const CreatePage = ()=> {
 	const history = useHistory()
@@ -13,14 +17,19 @@ export const CreatePage = ()=> {
 	const pressHandler = async event => {
 		if(event.key === 'Enter'){
 			try{
-				const data =  await request(
-					'/api/v1/link/generate',
+				const {newLink} = await request(
+					`${BACK_END_LINK}/api/v1/link/generate`,
 					'POST',
 					{from:link},
 					{Authorization:`Bearer ${auth.token}`}
 				)
-				history.push(`/detail/${data.link._id}`)
-			} catch (e) {}
+				toast.success('Link Successfully added');
+				if(newLink){
+					history.push(`/detail/${newLink._id}`);
+				}
+			} catch (e) {
+				toast.error(e.message);
+			}
 		}
 	}
 	return (
@@ -36,6 +45,7 @@ export const CreatePage = ()=> {
 					onKeyPress={pressHandler}
 					label="Insert Your Link"
 					/>
+				<ToastContainer/>
 			</div>
 		</MDBRow>
 	)

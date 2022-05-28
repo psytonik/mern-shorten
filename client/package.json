@@ -3,18 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@devexpress/dx-react-chart": "^2.7.6",
-    "@devexpress/dx-react-chart-material-ui": "^2.7.6",
-    "@devexpress/dx-react-core": "^2.7.6",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "chart.js": "^3.4.1",
     "mdb-react-ui-kit": "^1.1.0",
+    "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
+    "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.2",
+    "react-moment": "^1.1.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^9.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -29,7 +31,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:4000",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.12.1"
   }
 }

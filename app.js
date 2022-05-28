@@ -4,11 +4,13 @@ const app = express();
 require('dotenv').config();
 const cors = require('cors');
 const compression = require('compression');
+const helmet = require("helmet");
 const connectionToDb = require('./dbConfig/connection.js');
 
 app.use(compression());
 app.use(cors());
 app.use(express.json({extended:true}));
+app.use(helmet());
 
 app.use('/api/v1/auth',require('./routes/authRoute.js'));
 app.use('/api/v1/link',require('./routes/linksRoute.js'));

@@ -19,7 +19,7 @@ const LinksList = ({links}) => {
 				</tr>
 				</thead>
 				<tbody>
-				{ links.map((link,ind)=>{
+				{ links && links.map((link,ind)=>{
 					return(
 						<tr key={ind}>
 							<td>{ind+1}</td>

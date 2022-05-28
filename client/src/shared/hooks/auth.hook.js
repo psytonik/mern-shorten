@@ -9,19 +9,23 @@ export const useAuth = () => {
 	const login = useCallback(async(jwtToken,id)=>{
 		setToken(jwtToken)
 		setUserId(id)
-		localStorage.setItem(storageName,JSON.stringify({token:jwtToken,userId:id}))
-	},[])
+		sessionStorage.setItem(storageName,JSON.stringify({token:jwtToken,userId:id}))
+	},[]);
+
 	const logOut = useCallback(async()=>{
 		setToken(null)
 		setUserId(null)
-		localStorage.removeItem(storageName);
-	},[])
+		sessionStorage.removeItem(storageName);
+	},[]);
+
 	useEffect(()=>{
-		const data = JSON.parse(localStorage.getItem(storageName))
+		const data = JSON.parse(sessionStorage.getItem(storageName))
 		if(data && data.token){
 			login(data.token, data.userId).then(r =>r);
 		}
 		setReady(true);
-	},[login])
+	},[login]);
+
 	return {login,logOut,token,userId,ready};
-}
+};
+

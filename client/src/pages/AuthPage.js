@@ -10,6 +10,8 @@ import {
 	MDBInput
 } from "mdb-react-ui-kit";
 import React, {useContext, useEffect, useState} from "react";
+import {toast, ToastContainer} from "react-toastify";
+import {BACK_END_LINK} from "../constants/others.js";
 
 
 import {AuthContext} from "../context/AuthContext.js";
@@ -27,25 +29,40 @@ export const AuthPage = () => {
 		setForm({...form, [event.target.name]: event.target.value})
 	};
 	useEffect(() => {
+		toast.error(error)
 		clearErrors();
-	}, [error,clearErrors])
+	}, [error,clearErrors]);
+
 	const signUpHandler = async () => {
 		try {
-			const data = await request('/api/v1/auth/sign-up','POST', {...form});
-			console.log('data from sign up', data)
+			const data = await request(`${BACK_END_LINK}/api/v1/auth/sign-up`,'POST', {...form});
+			if(data.success === false){
+				return toast.error(data.message);
+			} else {
+				return toast.success(data.message);
+			}
 		} catch (e) {
+			return toast.error("Registration Failed ", e.message);
 		}
 	}
 	const signInHandler = async () => {
 		try {
-			const data = await request('/api/v1/auth/sign-in','POST', {...form});
-			auth.login(data.token,data.userId);
+			const data = await request(`${BACK_END_LINK}/api/v1/auth/sign-in`,'POST', {...form});
+
+			if(data.success === false) {
+				return toast.error(data.message)
+			} else {
+				await auth.login(data.token,data.userId);
+				return toast.success(data.message);
+			}
 		} catch (e) {
+			return toast.error(e.message);
 		}
 	}
 
 	return (
 		<>
+			<ToastContainer/>
 			<div className="row text-center mt-5">
 				<div className="col-md-3">
 					<p>Sponsored by</p>
