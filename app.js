@@ -15,11 +15,14 @@ app.use(helmet());
 app.use('/api/v1/auth',require('./routes/authRoute.js'));
 app.use('/api/v1/link',require('./routes/linksRoute.js'));
 app.use('/',require('./routes/redirectRoute.js'));
-
-app.use('/', express.static(path.join(__dirname,'client','build')))
-app.get('*',(req,res)=>{
-	res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+app.get('/',(req,res)=>{
+	res.status(200).json({message:"hello it\'s test an it works"});
 })
+
+// app.use('/', express.static(path.join(__dirname,'client','build')))
+// app.get('*',(req,res)=>{
+// 	res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+// })
 
 connectionToDb()
 	.finally(()=>{console.log('mongoose connected')});
