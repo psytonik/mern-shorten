@@ -32,7 +32,7 @@ const signInController = async(req,res)=>{
 		res.json({token,userId:user.id});
 
 	} catch (e) {
-		res.status(500).json({message:'something wrong in Login, try again',success:false})
+		res.status(500).json({message:e.message,success:false})
 	}
 }
 
@@ -54,7 +54,7 @@ const signUpController = async (req,res)=>{
 		await user.save();
 		res.status(201).json({message:'User Created',success:true});
 	} catch (e) {
-		res.status(500).json({message:'something wrong, try again',success:false});
+		res.status(500).json({message:e.message,success:false});
 	}
 }
 
