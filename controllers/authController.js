@@ -8,7 +8,7 @@ const signInController = async(req,res)=>{
 		const errors = validationResult(req);
 
 		if(!errors.isEmpty()){
-			res.status(400).json({errors:errors.array(), message:'Wrong Credentials'})
+			res.status(400).json({errors:errors.array(), message:'Wrong Credentials or Short Password'})
 			return
 		}
 		const {email,password} = req.body;
