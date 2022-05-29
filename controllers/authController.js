@@ -6,6 +6,7 @@ const User = require("../models/User.js");
 const signInController = async(req,res)=>{
 	try{
 		const errors = validationResult(req);
+
 		if(!errors.isEmpty()){
 			res.status(400).json({errors:errors.array(), message:'Wrong Credentials'})
 			return
@@ -13,12 +14,14 @@ const signInController = async(req,res)=>{
 		const {email,password} = req.body;
 
 		const user = await User.findOne({email});
+
 		if(!user){
 			res.status(400).json({message:'No User with this email',success:false})
 			return
 		}
 
 		const isMatch = await bcrypt.compare(password,user.password);
+
 		if(!isMatch){
 			res.status(400).json({message:'Wrong password, try again',success:false})
 			return
