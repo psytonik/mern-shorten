@@ -11,7 +11,7 @@ const validateSignIn = 	() => {
 	];
 }
 router.route('/sign-in')
-	.post( validateSignIn(), signInController);
+	.post(validateSignIn(), signInController);
 
 /// VALIDATION OF COMING DATA FROM FRONT END
 const validateSignUp = () => {
@@ -21,6 +21,6 @@ const validateSignUp = () => {
 	]
 }
 router.route('/sign-up')
-	.post( validateSignUp(),signUpController);
+	.post(validateSignUp(),signUpController);
 
 module.exports = router;
