@@ -19,7 +19,7 @@ app.use('/api/v1/auth',require('./routes/authRoute.js'));
 app.use('/api/v1/link',require('./routes/linksRoute.js'));
 app.use('/',require('./routes/redirectRoute.js'));
 app.get('/',(req,res)=>{
-	res.status(200).json({message:"hello it\'s test an it works"});
+	res.redirect('https://shirtl.netlify.app')
 });
 
 connectionToDb()
