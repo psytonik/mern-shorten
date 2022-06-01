@@ -54,6 +54,27 @@ const getLinkById = async (req,res)=>{
 		res.status(500).json({message:error.message,success:false})
 	}
 }
+const getLinkByIdAndUpdate = async (req,res) => {
+	try{
+		const linkToUpdate = await Link.findById(req.params.id);
+		const newLink = linkToUpdate.to.replace(linkToUpdate.code,req.body.code);
+		const alreadyExistCode = await Link.findOne({code:req.body.code});
+		if(!linkToUpdate){
+			return res.status(404).json({message:'Link with this id not found',success:false})
+		} else {
+			if(alreadyExistCode){
+				return res.status(200).json({message:`Link already exists`})
+			} else {
+				linkToUpdate.code = req.body.code;
+				linkToUpdate.to = newLink;
+				const updatedLink = await linkToUpdate.save();
+				res.status(200).json(updatedLink);
+			}
+		}
+	}catch (error) {
+		res.status(500).json({message:error.message,success:false})
+	}
+}
 
 const deleteLinkById = async (req,res)=>{
 	try{
@@ -75,4 +96,4 @@ const deleteLinkById = async (req,res)=>{
 	}
 }
 
-module.exports = {generateLink,getUserLinks,getLinkById,deleteLinkById}
+module.exports = {generateLink,getUserLinks,getLinkById,deleteLinkById,getLinkByIdAndUpdate}
