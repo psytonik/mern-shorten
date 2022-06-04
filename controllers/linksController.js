@@ -63,7 +63,7 @@ const getLinkByIdAndUpdate = async (req,res) => {
 			return res.status(404).json({message:'Link with this id not found',success:false})
 		} else {
 			if(alreadyExistCode){
-				return res.status(200).json({message:`Link already exists`})
+				return res.status(200).json({message:`Link already exists`,success:false})
 			} else {
 				linkToUpdate.code = req.body.code;
 				linkToUpdate.to = newLink;

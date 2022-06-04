@@ -8,8 +8,9 @@ const redirectController = async(req,res)=>{
 			link.clicksDate.push(new Date())
 			await link.save();
 			return res.redirect(link.from);
+		} else {
+			return res.status(404).json({message: "This link wrong or removed"});
 		}
-		res.status(404).json({message:'Link not Found'});
 	}catch (error) {
 		res.status(500).json({message:error.message,success:false})
 	}

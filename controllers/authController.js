@@ -32,7 +32,7 @@ const signInController = async(req,res)=>{
 			process.env.JWT_SECRET,
 			{expiresIn: '12h'}
 		)
-		res.json({token,userId:user.id});
+		res.status(200).json({token,userId:user.id});
 
 	} catch (e) {
 		res.status(500).json({message:e.message,success:false})
